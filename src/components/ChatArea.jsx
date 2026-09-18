@@ -21,14 +21,14 @@ function ChatArea({
     callbacksRef.current = { onToggleSidebar, onInputChange, onSend };
   });
 
-  // Sidebar toggle button (shown when sidebar is closed)
+  // Sidebar toggle button (conditionally rendered — re-attach when sidebarOpen changes)
   useEffect(() => {
     const btn = toggleRef.current;
     if (!btn) return;
     const handler = () => callbacksRef.current.onToggleSidebar();
     btn.addEventListener('click', handler);
     return () => btn.removeEventListener('click', handler);
-  }, []);
+  }, [sidebarOpen]);
 
   // Send button
   useEffect(() => {
